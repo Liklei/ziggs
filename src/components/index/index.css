@@ -1,0 +1,12 @@
+.index {
+   width: 100vw;
+   height: 100vh;
+   background-color: rgba(28,39,48,.5);
+   display: flex;
+}
+button {
+    cursor: pointer;
+}
+.mr-15 {
+    margin-right: 15px;
+}
