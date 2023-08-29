@@ -4,6 +4,8 @@ import {
 } from "react-router-dom";
 import Index from '../components/index';
 import ChatApp from '../components/chat';
+import Drag from '../components/drag';
+import Three from '../components/three';
 
 const routesRouteObject: Array<RouteObject> = [
     {
@@ -13,6 +15,14 @@ const routesRouteObject: Array<RouteObject> = [
     {
         path: "/chat",
         Component: ChatApp,
+    },
+    {
+        path: "/drag",
+        Component: Drag
+    },
+    {
+        path: "/three",
+        Component: Three
     }
 ];
   

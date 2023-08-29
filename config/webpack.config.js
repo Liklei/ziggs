@@ -1,5 +1,4 @@
 'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
@@ -16,6 +15,7 @@ const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const WindiCSSWebpackPlugin = require('windicss-webpack-plugin');
 const paths = require('./paths');
 const modules = require('./modules');
 const getClientEnvironment = require('./env');
@@ -149,7 +149,6 @@ module.exports = function (webpackEnv) {
                   'postcss-normalize',
                 ]
               : [
-                  'tailwindcss',
                   'postcss-flexbugs-fixes',
                   [
                     'postcss-preset-env',
@@ -504,45 +503,45 @@ module.exports = function (webpackEnv) {
             // Opt-in support for SASS (using .scss or .sass extensions).
             // By default we support SASS Modules with the
             // extensions .module.scss or .module.sass
-            {
-              test: sassRegex,
-              exclude: sassModuleRegex,
-              use: getStyleLoaders(
-                {
-                  importLoaders: 3,
-                  sourceMap: isEnvProduction
-                    ? shouldUseSourceMap
-                    : isEnvDevelopment,
-                  modules: {
-                    mode: 'icss',
-                  },
-                },
-                'sass-loader'
-              ),
-              // Don't consider CSS imports dead code even if the
-              // containing package claims to have no side effects.
-              // Remove this when webpack adds a warning or an error for this.
-              // See https://github.com/webpack/webpack/issues/6571
-              sideEffects: true,
-            },
+            // {
+            //   test: sassRegex,
+            //   exclude: sassModuleRegex,
+            //   use: getStyleLoaders(
+            //     {
+            //       importLoaders: 3,
+            //       sourceMap: isEnvProduction
+            //         ? shouldUseSourceMap
+            //         : isEnvDevelopment,
+            //       modules: {
+            //         mode: 'icss',
+            //       },
+            //     },
+            //     'sass-loader'
+            //   ),
+            //   // Don't consider CSS imports dead code even if the
+            //   // containing package claims to have no side effects.
+            //   // Remove this when webpack adds a warning or an error for this.
+            //   // See https://github.com/webpack/webpack/issues/6571
+            //   sideEffects: true,
+            // },
             // Adds support for CSS Modules, but using SASS
             // using the extension .module.scss or .module.sass
-            {
-              test: sassModuleRegex,
-              use: getStyleLoaders(
-                {
-                  importLoaders: 3,
-                  sourceMap: isEnvProduction
-                    ? shouldUseSourceMap
-                    : isEnvDevelopment,
-                  modules: {
-                    mode: 'local',
-                    getLocalIdent: getCSSModuleLocalIdent,
-                  },
-                },
-                'sass-loader'
-              ),
-            },
+            // {
+            //   test: sassModuleRegex,
+            //   use: getStyleLoaders(
+            //     {
+            //       importLoaders: 3,
+            //       sourceMap: isEnvProduction
+            //         ? shouldUseSourceMap
+            //         : isEnvDevelopment,
+            //       modules: {
+            //         mode: 'local',
+            //         getLocalIdent: getCSSModuleLocalIdent,
+            //       },
+            //     },
+            //     'sass-loader'
+            //   ),
+            // },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
@@ -601,6 +600,9 @@ module.exports = function (webpackEnv) {
       // It will be an empty string unless you specify "homepage"
       // in `package.json`, in which case it will be the pathname of that URL.
       new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
+      new WindiCSSWebpackPlugin({
+        virtualModulePath: 'src',
+      }),
       // This gives some necessary context to module not found errors, such as
       // the requesting resource.
       new ModuleNotFoundPlugin(paths.appPath),

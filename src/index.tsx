@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import reportWebVitals from './reportWebVitals';
+import './virtual:windi.css'
 
 // redux toolkit
 import {Provider} from 'react-redux';

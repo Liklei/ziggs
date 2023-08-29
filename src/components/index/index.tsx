@@ -9,18 +9,24 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useDebounce } from "ahooks";
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement, selectCount } from "../../store/features/counterSlice";
+import {
+  decrement,
+  increment,
+  selectCount,
+} from "../../store/features/counterSlice";
+
 import "./index.css";
 
 export default function Index() {
   const [value, setValue] = useState<string>();
   const debouncedValue = useDebounce(value, { wait: 500 });
-  const { cValue } = useSelector(selectCount);
+
+  const count = useSelector(selectCount);
   const dispatch = useDispatch();
 
   return (
     <div className="index">
-      <div>
+      <div className="mb-[15px]">
         <Card sx={{ maxWidth: 345, maxHeight: 320 }}>
           <CardMedia
             sx={{ height: 140 }}
@@ -42,7 +48,7 @@ export default function Index() {
           </CardActions>
         </Card>
       </div>
-      <div>
+      <div className="mb-[15px]">
         <Box
           component="form"
           sx={{
@@ -59,13 +65,13 @@ export default function Index() {
             onChange={(e) => setValue(e.target.value)}
           />
         </Box>
+        <p>DebouncedValue: {debouncedValue}</p>
       </div>
       <div>
-        <p>{cValue}</p>
-        <Button className="mr-15" variant="contained" onClick={()=>{dispatch(increment())}}>+</Button>
-        <Button variant="contained" onClick={()=>{dispatch(decrement())}}>-</Button>
+        <p>{count}</p>
+        <Button className="mr-[15px] cursor-pointer" variant="contained" onClick={() => dispatch(decrement())}>-</Button>
+        <Button className="cursor-pointer" variant="contained" onClick={() => dispatch(increment())}>+</Button>
       </div>
-      <p>DebouncedValue: {debouncedValue}</p>
     </div>
   );
 }
