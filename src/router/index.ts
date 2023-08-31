@@ -5,7 +5,6 @@ import {
 import Index from '../components/index';
 import ChatApp from '../components/chat';
 import Three from '../components/three';
-import Dnd from '../view/dnd'
 
 const routesRouteObject: Array<RouteObject> = [
     {
@@ -19,10 +18,6 @@ const routesRouteObject: Array<RouteObject> = [
     {
         path: "/three",
         Component: Three
-    },
-    {
-        path: "/dnd",
-        Component: Dnd
     }
 ];
   
